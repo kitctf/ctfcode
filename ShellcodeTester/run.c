@@ -49,7 +49,7 @@ int main(int argc, char* argv[])
         printf("[*] copying shellcode...\n");
         memcpy(ptr, shellcode, len);
     }
-    printf("[+] done, size of shellcode: %i bytes\n", len);
+    printf("[+] done, size of shellcode: %zi bytes\n", len);
 
     printf("[*] jumping into shellcode...\n\n");
     (*(void (*)()) buf)();

@@ -43,3 +43,15 @@ Afterwards go ahead and directly test your new code with the ShellcodeTester:
 These mostly take care of the networking stuff so your exploit doesn't have to, but they also provide some commonly needed funtionality, e.g. packing and unpacking of binary data.
 
 See [here](http://kitctf.de/writeups/9447ctf2014/2014/12/01/europe-writeup/) for a usage example (the code uses an older version of the templates though) or just play around with them a bit on your own.
+
+###./NetworkProxy
+
+A simple network proxy. Supports live inspection and manipulation of packets passing through it.
+
+Usage:
+
+```bash
+cd NetworkProxy
+make
+./proxy 127.0.0.1:8000 kitctf.de:80
+```

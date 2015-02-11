@@ -18,9 +18,13 @@ import (
 type PacketHandler func (packet []byte) []byte
 
 // Simple packet handler to dump the packets to the console
-func dumpPacket(packet []byte) []byte {
-    fmt.Println(hex.Dump(packet))
-    return packet
+func dumpPacketHandler(tag string) PacketHandler {
+    return func (packet []byte) []byte {
+        fmt.Println(tag)
+        fmt.Println("------------------------------------------------------")
+        fmt.Println(hex.Dump(packet))
+        return packet
+    }
 }
 
 
@@ -50,8 +54,8 @@ func relay(source, dest net.Conn, handler PacketHandler) {
 }
 
 func proxy(client, server net.Conn) {
-    go relay(client, server, dumpPacket)
-    go relay(server, client, dumpPacket)
+    go relay(client, server, dumpPacketHandler("Client: " + client.RemoteAddr().String()))
+    go relay(server, client, dumpPacketHandler("Server: " + server.RemoteAddr().String()))
 }
 
 func main() {
